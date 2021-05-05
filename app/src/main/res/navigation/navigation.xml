@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/productListFragment">
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.example.adidaschallenge.fragments.ProductsListFragment"
+        android:label="@string/product_list_text"
+        tools:layout="@layout/fragment_products_list" >
+        <action
+            android:id="@+id/action_productListFragment_to_productDetaisFragment"
+            app:destination="@id/productDetaisFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetaisFragment"
+        android:name="com.example.adidaschallenge.fragments.ProductDetailsFragment"
+        android:label="@string/product_details_text"
+        tools:layout="@layout/fragment_product_details" >
+        <argument
+            android:name="productId"
+            app:argType="string" />
+    </fragment>
+</navigation>

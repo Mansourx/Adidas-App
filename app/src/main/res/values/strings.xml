@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">AdidasChallenge</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="product_list_text">Product List</string>
+    <string name="product_details_text">Product Details</string>
+    <string name="product_title">Product Title</string>
+    <string name="product">Product</string>
+    <string name="product_image_description">The Product Image</string>
+    <string name="search">Search…</string>
+    <string name="add_review">Add Review</string>
+    <string name="review_hint">This is Amazing Product</string>
+    <string name="review_dialog_hint">Happy To Hear From you!</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_date_error">Error, No Data!</string>
+    <string name="customer_reviews">Customer Reivews</string>
+
+</resources>
