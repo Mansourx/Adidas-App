@@ -44,8 +44,8 @@
             <TextView
                 android:id="@+id/description_text"
                 style="@style/text_style"
-                android:layout_width="76dp"
-                android:layout_height="19dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toEndOf="@+id/product_img"
@@ -55,7 +55,7 @@
             <TextView
                 android:id="@+id/price_text"
                 style="@style/text_style"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
@@ -66,7 +66,7 @@
             <TextView
                 android:id="@+id/name_product"
                 style="@style/text_style"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/product"

@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_size_regular_14sp">14sp</dimen>
+    <dimen name="text_size_large_18sp">18sp</dimen>
     <dimen name="text_big_18sp">18sp</dimen>
     <dimen name="padding_5dp">5dp</dimen>
+    <dimen name="text_size_large_20sp">20sp</dimen>
+    <dimen name="layout_margin_5dp">5dp</dimen>
+    <dimen name="layout_margin_2dp">2dp</dimen>
+    <dimen name="large_text_24sp">24sp</dimen>
 </resources>

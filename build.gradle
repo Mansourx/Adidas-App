@@ -3,12 +3,52 @@ buildscript {
     ext {
         version_kotlin = "1.4.32"
         version_core = "1.3.2"
-        version_navigation = "2.3.0"
+        version_compat = "1.2.0"
+        version_material_Design = "1.3.0"
+        version_constraint_layout = "2.0.4"
+        version_navigation = "2.2.0-rc03"
         retrofit2Version = "2.9.0"
         okHttp3Version = "4.9.0"
         kotlinCoroutineVersion = "1.4.3"
         lifecycleVersion = "2.3.1"
-        frescoVersion = "2.4.0"
+        lifecycleExtension = "2.2.0"
+        version_glide = '4.11.0'
+        legacy_version = '1.0.0'
+
+        // Testing-only versions
+        junitVersion = "1.1.2"
+        robolectricVersion = "4.4"
+        robolectricShadowsMapsVersion = "3.3.2"
+        mockkVersion = "1.10.5"
+        espressoVersion = "3.3.0"
+        robotiumVersion = "5.6.3"
+        supportTestVersion = "1.3.0"
+        hamcrestVersion = "2.2"
+        hamcrestIntegrationVersion = "1.3"
+        assertjVersion = "3.19.0"
+        kotlinCoroutineVersion = "1.4.2"
+        coreTest = "1.4.2"
+        coroutineTest = "1.3.9"
+
+        libs = [
+                glide           : "com.github.bumptech.glide:glide:$version_glide",
+                legacy          : "androidx.legacy:legacy-support-v4:$legacy_version",
+                core            : "androidx.core:core-ktx:$version_core",
+                compat          : "androidx.appcompat:appcompat:$version_compat",
+                constraintLayout: "androidx.constraintlayout:constraintlayout:$version_constraint_layout",
+        ]
+
+        lifeCycle = [
+                viewModel : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion",
+                liveData  : "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion",
+                common    : "androidx.lifecycle:lifecycle-common:$lifecycleVersion",
+                runtime   : "androidx.lifecycle:lifecycle-runtime:$lifecycleVersion",
+                extensions: "android.arch.lifecycle:extensions:$lifecycleVersion"
+        ]
+
+        google = [
+                material: "com.google.android.material:material:$version_material_Design"
+        ]
 
         square = [
                 okhttp3             : "com.squareup.okhttp3:okhttp:$okHttp3Version",
@@ -19,12 +59,36 @@ buildscript {
         ]
 
         kotlinX = [
-                coroutinesCore    : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion",
-                coroutinesAndroid : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
+                coroutinesCore   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutineVersion",
+                coroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutineVersion"
         ]
 
         kotlin = [
                 stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version_kotlin"
+        ]
+
+        navigation = [
+                navfragment: "android.arch.navigation:navigation-fragment-ktx:$version_navigation",
+                navui      : "android.arch.navigation:navigation-ui-ktx:$version_navigation"
+        ]
+
+        test = [
+                junit              : "androidx.test.ext:junit:$junitVersion",
+                hamcrestIntegration: "org.hamcrest:hamcrest-integration:$hamcrestIntegrationVersion",
+                hamcrestCore       : "org.hamcrest:hamcrest-core:$hamcrestVersion",
+                hamcrestLibrary    : "org.hamcrest:hamcrest-library:$hamcrestVersion",
+                robolectric        : "org.robolectric:robolectric:$robolectricVersion",
+                robolectricMultidex: "org.robolectric:shadows-multidex:$robolectricVersion",
+                robolectricMaps    : "org.robolectric:shadows-maps:$robolectricShadowsMapsVersion",
+                mockk              : "io.mockk:mockk:$mockkVersion",
+                robotium           : "com.jayway.android.robotium:robotium-solo:$robotiumVersion",
+                assertj            : "org.assertj:assertj-core:$assertjVersion",
+                espresso           : "androidx.test.espresso:espresso-core:$espressoVersion",
+                espressoContrib    : "androidx.test.espresso:espresso-contrib:$espressoVersion",
+                testRunner         : "androidx.test:runner:$supportTestVersion",
+                testRulles         : "androidx.test:rules:$supportTestVersion",
+                coreTest              : "android.arch.core:core-testing:$coreTest",
+                coroutinesTest     : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineTest",
         ]
     }
     repositories {
@@ -36,8 +100,9 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // Google Firebase Library to enable Crashlytics
+        classpath 'com.google.gms:google-services:4.3.5'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.5.2'
     }
 }
 

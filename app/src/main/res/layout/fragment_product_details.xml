@@ -18,11 +18,21 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:contentDescription="@string/product_image_description"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_margin_5dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/layout_margin_5dp"
+            android:background="@color/divider_color"
+            app:layout_constraintTop_toBottomOf="@+id/product_image"
+            tools:layout_editor_absoluteX="5dp" />
 
         <TextView
             android:id="@+id/description_text"
@@ -40,10 +50,10 @@
             style="@style/text_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
+            android:layout_marginStart="160dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toEndOf="@+id/name_product"
-            app:layout_constraintTop_toBottomOf="@+id/product_image"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
             tools:text="Price" />
 
         <TextView
@@ -54,21 +64,49 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/product_image"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
             tools:text="@string/product" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reviews_list"
-            style="@style/text_style"
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layout_margin_5dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@color/divider_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_text" />
+
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
+            android:minHeight="300dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:background="#B8B8B8"
             app:layout_constraintBottom_toTopOf="@+id/add_review_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/reviews_title">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviews_list"
+                style="@style/text_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/empty_reviews_text"
+                style="@style/text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/empty_review_text"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </FrameLayout>
+
 
         <Button
             android:id="@+id/add_review_btn"
@@ -93,15 +131,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/reviews_title"
             style="@style/text_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="30dp"
             android:text="@string/customer_reviews"
+            android:textSize="@dimen/large_text_24sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description_text" />
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

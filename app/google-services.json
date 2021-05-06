@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "634048506413",
+    "project_id": "adidaschallenge-2340c",
+    "storage_bucket": "adidaschallenge-2340c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634048506413:android:fdc8e6ca534d050c71e6a4",
+        "android_client_info": {
+          "package_name": "com.example.adidaschallenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "634048506413-2r1njonqefqc986005atghcchm7auhju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgUiEfm3RukkxcCCQ4up9KBQdz-osahWk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "634048506413-2r1njonqefqc986005atghcchm7auhju.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

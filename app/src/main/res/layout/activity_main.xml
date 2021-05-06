@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".activities.MainActivity">
+
         <!-- The NavHostFragment within the activity_main layout -->
         <fragment
             android:id="@+id/myNavHostFragment"
@@ -23,4 +24,3 @@
     </LinearLayout>
 
 </layout>
-

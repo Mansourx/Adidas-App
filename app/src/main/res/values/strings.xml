@@ -12,7 +12,11 @@
     <string name="review_dialog_hint">Happy To Hear From you!</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
-    <string name="no_date_error">Error, No Data!</string>
-    <string name="customer_reviews">Customer Reivews</string>
+    <string name="error">Error!</string>
+    <string name="customer_reviews">Customer Reviews:</string>
+    <string name="internet_lost_message">Adidas Requires Internet Connection To View Latest Styles</string>
+    <string name="retry">Retry</string>
+    <string name="enter_review">Please Enter a Review!</string>
+    <string name="empty_review_text">Ops, There is no reviews yet</string>
 
 </resources>

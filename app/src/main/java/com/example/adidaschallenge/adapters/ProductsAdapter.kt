@@ -68,12 +68,12 @@ class ProductsAdapter(val listener: ProductActionListener, val context: Context)
 
         override fun onClick(view: View?) {
             when (view?.id) {
-                R.id.item_container -> listener.open(products[adapterPosition].id.toString())
+                R.id.item_container -> listener.navigateToFragment(products[adapterPosition].id.toString())
             }
         }
     }
 
     interface ProductActionListener {
-        fun open(id: String)
+        fun navigateToFragment(id: String)
     }
 }

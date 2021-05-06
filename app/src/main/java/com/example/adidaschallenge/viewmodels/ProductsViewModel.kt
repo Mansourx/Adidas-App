@@ -7,7 +7,10 @@ import com.example.adidaschallenge.models.Product
 import com.example.adidaschallenge.models.Review
 import com.example.adidaschallenge.network.ResultWrapper
 import com.example.adidaschallenge.network.UIState
-import com.example.adidaschallenge.repositories.ProductRepositoryImpl
+import com.example.adidaschallenge.usecases.AddReviewUseCaseImpl
+import com.example.adidaschallenge.usecases.GetAllProductsUseCaseImpl
+import com.example.adidaschallenge.usecases.GetProductUseCaseImpl
+import com.example.adidaschallenge.usecases.GetReviewsUseCaseImpl
 import kotlinx.coroutines.launch
 import java.net.HttpURLConnection
 
@@ -20,7 +23,17 @@ import java.net.HttpURLConnection
 
 class ProductsViewModel : BaseViewModel() {
 
-    private val productRepositoryImpl: ProductRepositoryImpl
+    private var getProductUseCase: GetProductUseCaseImpl
+    private var getReviewsUseCase: GetReviewsUseCaseImpl
+    private var addReviewUseCase: AddReviewUseCaseImpl
+    private var getAllProductsUseCase: GetAllProductsUseCaseImpl
+
+    init {
+        getProductUseCase = GetProductUseCaseImpl()
+        getReviewsUseCase = GetReviewsUseCaseImpl()
+        addReviewUseCase = AddReviewUseCaseImpl()
+        getAllProductsUseCase = GetAllProductsUseCaseImpl()
+    }
 
     private var productData: MutableLiveData<Product> = MutableLiveData()
     private var productsDetails: MutableLiveData<List<Product>> = MutableLiveData()
@@ -28,12 +41,9 @@ class ProductsViewModel : BaseViewModel() {
     private var reviewDetails: MutableLiveData<Review> = MutableLiveData()
     private var productReviews: MutableLiveData<MutableList<Review>> = MutableLiveData()
 
-    init {
-        productRepositoryImpl = ProductRepositoryImpl.instance!!
-    }
 
     fun getAllProducts() = viewModelScope.launch {
-        when (val response = productRepositoryImpl.getProducts(PRODUCT_URL)) {
+        when (val response = getAllProductsUseCase.invoke(url = PRODUCT_URL)) {
             is ResultWrapper.Success -> {
                 productsDetails.postValue(response.value)
                 uiState.postValue(UIState.Completed)
@@ -44,7 +54,7 @@ class ProductsViewModel : BaseViewModel() {
     }
 
     fun getProduct(id: String) = viewModelScope.launch {
-        when (val response = productRepositoryImpl.getProduct("$PRODUCT_URL$id")) {
+        when (val response = getProductUseCase.invoke(url = "$PRODUCT_URL$id")) {
             is ResultWrapper.Success -> {
                 productData.postValue(response.value)
                 uiState.postValue(UIState.Completed)
@@ -55,7 +65,7 @@ class ProductsViewModel : BaseViewModel() {
     }
 
     fun addReview(id: String, review: Review) = viewModelScope.launch {
-        when (val response = productRepositoryImpl.addReview("$REVIEWS_URL$id", review)) {
+        when (val response = addReviewUseCase.invoke(url = "$REVIEWS_URL$id", review)) {
             is ResultWrapper.Success -> {
                 reviewDetails.postValue(response.value)
                 uiState.postValue(UIState.Completed)
@@ -66,7 +76,7 @@ class ProductsViewModel : BaseViewModel() {
     }
 
     fun getReviews(id: String) = viewModelScope.launch {
-        when (val reviews = productRepositoryImpl.getReviews("$REVIEWS_URL$id")) {
+        when (val reviews = getReviewsUseCase.invoke(url = "$REVIEWS_URL$id")) {
             is ResultWrapper.Success -> {
                 productReviews.postValue(reviews.value)
                 uiState.postValue(UIState.Completed)

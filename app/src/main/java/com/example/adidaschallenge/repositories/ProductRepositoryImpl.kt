@@ -2,7 +2,7 @@ package com.example.adidaschallenge.repositories
 
 import com.example.adidaschallenge.models.Product
 import com.example.adidaschallenge.models.Review
-import com.example.adidaschallenge.network.Api
+import com.example.adidaschallenge.network.api.Api
 import com.example.adidaschallenge.network.ResultWrapper
 import com.example.adidaschallenge.network.RetrofitService
 import com.example.adidaschallenge.network.safeApiCall
@@ -16,29 +16,29 @@ import com.example.adidaschallenge.network.safeApiCall
 
 class ProductRepositoryImpl : ProductRepository {
 
-    private val productsApi: Api = RetrofitService.createService(Api::class.java)
+    private val apiR2: Api = RetrofitService.createService(Api::class.java)
 
     override suspend fun getProducts(url: String): ResultWrapper<List<Product>> {
         return safeApiCall {
-            productsApi.getProductsListAsync(url)
+            apiR2.getProductsListAsync(url)
         }
     }
 
     override suspend fun getProduct(url: String): ResultWrapper<Product?> {
         return safeApiCall {
-            productsApi.getProductAsync(url)
+            apiR2.getProductAsync(url)
         }
     }
 
     override suspend fun addReview(url: String, review: Review): ResultWrapper<Review> {
         return safeApiCall {
-            productsApi.addProductReview(url, review)
+            apiR2.addProductReviewAsync(url, review)
         }
     }
 
     override suspend fun getReviews(url: String): ResultWrapper<MutableList<Review>> {
         return safeApiCall {
-            productsApi.getProductReviews(url)
+            apiR2.getProductReviewsAsync(url)
         }
     }
 

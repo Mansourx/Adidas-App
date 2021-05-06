@@ -1,29 +1,32 @@
 package com.example.adidaschallenge.fragments
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.adidaschallenge.R
 import com.example.adidaschallenge.adapters.ReviewsAdapter
 import com.example.adidaschallenge.databinding.FragmentProductDetailsBinding
+import com.example.adidaschallenge.dialog.AdidasDialog
 import com.example.adidaschallenge.models.Product
 import com.example.adidaschallenge.models.Review
 import com.example.adidaschallenge.network.UIState
+import com.example.adidaschallenge.toast
 import com.example.adidaschallenge.viewmodels.ProductsViewModel
 import kotlinx.android.synthetic.main.fragment_product_details.*
 
-class ProductDetailsFragment : Fragment(), View.OnClickListener {
+class ProductDetailsFragment : Fragment(), View.OnClickListener, AdidasDialog.AlertAction {
 
     var viewModel: ProductsViewModel? = null
     private var _binding: FragmentProductDetailsBinding? = null
@@ -58,9 +61,12 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
 
     private fun displayProductReviews(reviews: List<Review>?) {
         reviewsAdapter = ReviewsAdapter(reviews)
+        val viewManager = LinearLayoutManager(context)
+        val dividerItemDecoration = DividerItemDecoration(this.context, viewManager.orientation)
         binding.reviewsList.apply {
             adapter = reviewsAdapter
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = viewManager
+            addItemDecoration(dividerItemDecoration)
         }
         binding.reviewsList.adapter?.notifyDataSetChanged()
     }
@@ -74,7 +80,10 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
         viewModel?.observeProduct()?.observe(viewLifecycleOwner, productObserver)
 
         val reviewsObserver = Observer<List<Review>> { reviews ->
-            reviews?.let {
+            if (reviews.isNullOrEmpty()) {
+                binding.emptyReviewsText.visibility = View.VISIBLE
+            } else {
+                binding.emptyReviewsText.visibility = View.GONE
                 displayProductReviews(reviews)
             }
         }
@@ -91,14 +100,16 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
             when (it) {
                 is UIState.Loading -> showHideTransparentProgressBar(true)
                 is UIState.NetworkError -> {
+                    showNetworkError()
                     showHideTransparentProgressBar(false)
                 }
                 is UIState.Completed -> showHideTransparentProgressBar(false)
                 is UIState.GenericError -> {
+                    showNetworkError()
                     showHideTransparentProgressBar(false)
                     val errMsg = if (it.errorMsg.isNotEmpty()) it.errorMsg else
-                        getString(R.string.no_date_error)
-                    Toast.makeText(context, errMsg, Toast.LENGTH_SHORT).show()
+                        getString(R.string.error)
+                    context?.toast(errMsg)
                 }
                 else -> Unit
             }
@@ -134,20 +145,32 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
         with(builder) {
             setTitle(getString(R.string.add_review))
             setPositiveButton(getString(R.string.add)) { _, _ ->
-                val review = Review(productId, "NL", 5, reviewEditText.text.toString())
-                viewModel?.addReview(productId, review)
+                addReview(reviewEditText.text.toString())
             }
             setNegativeButton(getString(R.string.cancel)) { _, _ ->
             }
             setView(dialogLayout)
             show()
         }
-
     }
 
-    override fun onDestroy() {
-        _binding = null
-        super.onDestroy()
+    private fun showNetworkError() {
+        AdidasDialog().apply {
+            getAlertDialog(
+                requireContext(), getString(R.string.error),
+                getString(R.string.internet_lost_message),
+                getString(R.string.retry), getString(R.string.cancel), false,
+                this@ProductDetailsFragment
+            )
+        }
+    }
+
+    private fun addReview(review: String?) {
+        if (review.isNullOrEmpty()) {
+            context?.toast(getString(R.string.enter_review))
+            return
+        }
+        viewModel?.addReview(productId, Review(productId, "NL", 5, review))
     }
 
     override fun onClick(view: View?) {
@@ -156,5 +179,16 @@ class ProductDetailsFragment : Fragment(), View.OnClickListener {
                 showAddReviewDialog()
             }
         }
+    }
+
+    override fun positiveMethod(dialog: DialogInterface?, id: Int) {
+        viewModel?.getProduct(productId)
+    }
+
+    override fun negativeMethod(dialog: DialogInterface?, id: Int) = Unit
+
+    override fun onDestroy() {
+        _binding = null
+        super.onDestroy()
     }
 }

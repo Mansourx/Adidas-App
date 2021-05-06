@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.robolectric:shadows-maps:3.3.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.robolectric/shadows-maps/3.3.2/b45b2b0e8768e71b5424695e68e227fe82e6f4aa/shadows-maps-3.3.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.robolectric/shadows-maps/3.3.2/cb9177bac7d6e1668b277774ca2960a6ba4c1484/shadows-maps-3.3.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.robolectric/shadows-maps/3.3.2/d70ab0d0ff4e0c6579ece03bec5e7e5551bf40d3/shadows-maps-3.3.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
